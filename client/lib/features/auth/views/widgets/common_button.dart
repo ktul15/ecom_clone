@@ -6,6 +6,7 @@ class CommonButton extends StatelessWidget {
   final Color backgroundColor;
   final bool isRounded;
   final double fontSize;
+  final VoidCallback? onPressed;
 
   const CommonButton({
     super.key,
@@ -13,6 +14,7 @@ class CommonButton extends StatelessWidget {
     required this.backgroundColor,
     this.isRounded = false,
     this.fontSize = 14,
+    this.onPressed,
   });
 
   factory CommonButton.rounded({
@@ -40,19 +42,29 @@ class CommonButton extends StatelessWidget {
     );
   }
 
-  factory CommonButton.grayed({Key? key, required String title}) {
+  factory CommonButton.grayed({
+    Key? key,
+    required String title,
+    VoidCallback? onPressed,
+  }) {
     return CommonButton(
       key: key,
       title: title,
       backgroundColor: Pallete.lightGreyColor,
+      onPressed: onPressed,
     );
   }
 
-  factory CommonButton.primary({Key? key, required String title}) {
+  factory CommonButton.primary({
+    Key? key,
+    required String title,
+    VoidCallback? onPressed,
+  }) {
     return CommonButton(
       key: key,
       title: title,
       backgroundColor: Pallete.primaryColor,
+      onPressed: onPressed,
     );
   }
 
@@ -60,6 +72,7 @@ class CommonButton extends StatelessWidget {
     Key? key,
     required String title,
     double fontSize = 14,
+    VoidCallback? onPressed,
   }) {
     return CommonButton(
       key: key,
@@ -67,13 +80,14 @@ class CommonButton extends StatelessWidget {
       backgroundColor: Pallete.primaryColor,
       isRounded: true,
       fontSize: fontSize,
+      onPressed: onPressed,
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {},
+      onPressed: onPressed ?? () {},
       style: ElevatedButton.styleFrom(
         maximumSize: Size(MediaQuery.of(context).size.width, 40),
         fixedSize: Size(MediaQuery.of(context).size.width, 40),

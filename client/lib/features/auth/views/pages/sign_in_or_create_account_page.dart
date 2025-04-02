@@ -1,12 +1,17 @@
 import 'package:client/core/localization/app_localizations.dart';
+import 'package:client/core/router/route_paths.dart';
 import 'package:client/core/theme/app_pallette.dart';
 import 'package:client/core/theme/app_text_styles.dart';
+import 'package:client/features/auth/views/widgets/common_button.dart';
 import 'package:client/features/auth/views/widgets/common_text_field.dart';
-import 'package:client/features/auth/views/widgets/primary_button.dart';
+import 'package:client/features/home/views/pages/home_page.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class SignInOrCreateAccountPage extends StatefulWidget {
   const SignInOrCreateAccountPage({super.key});
+
+  static get route => RoutePaths.signIn;
 
   @override
   State<SignInOrCreateAccountPage> createState() =>
@@ -78,6 +83,11 @@ class _SignInOrCreateAccountPageState extends State<SignInOrCreateAccountPage> {
                   CommonButton.primaryRounded(
                     title: localizations.continueButton,
                     fontSize: 16,
+                    onPressed:
+                        () => context.goNamed(
+                          HomePage.route,
+                          extra: {"fromContinue": true},
+                        ),
                   ),
                   SizedBox(height: 24),
                   Align(
