@@ -2,29 +2,50 @@ import 'package:client/core/localization/app_localizations.dart';
 import 'package:client/core/router/route_paths.dart';
 import 'package:client/core/theme/app_pallette.dart';
 import 'package:client/core/theme/app_text_styles.dart';
+import 'package:client/features/auth/view_models/auth_view_model.dart';
 import 'package:client/features/auth/views/widgets/common_button.dart';
 import 'package:client/features/auth/views/widgets/common_text_field.dart';
-import 'package:client/features/home/views/pages/home_page.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class SignInOrCreateAccountPage extends StatefulWidget {
+class SignInOrCreateAccountPage extends ConsumerStatefulWidget {
   const SignInOrCreateAccountPage({super.key});
 
   static get route => RoutePaths.signIn;
 
   @override
-  State<SignInOrCreateAccountPage> createState() =>
+  ConsumerState<SignInOrCreateAccountPage> createState() =>
       _SignInOrCreateAccountPageState();
 }
 
-class _SignInOrCreateAccountPageState extends State<SignInOrCreateAccountPage> {
+class _SignInOrCreateAccountPageState
+    extends ConsumerState<SignInOrCreateAccountPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context);
+
+    ref.listen(authViewModelProvider, (_, next) {
+      next?.when(
+        data: (_) {
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(SnackBar(content: Text("Successfully signed in.")));
+          // Navigator.pushReplacement(
+          //   context,
+          //   MaterialPageRoute(builder: (_) => LoginPage()),
+          // );
+        },
+        error: (error, stackTrace) {
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(SnackBar(content: Text(error.toString())));
+        },
+        loading: () {},
+      );
+    });
 
     return SafeArea(
       child: Scaffold(
@@ -83,11 +104,19 @@ class _SignInOrCreateAccountPageState extends State<SignInOrCreateAccountPage> {
                   CommonButton.primaryRounded(
                     title: localizations.continueButton,
                     fontSize: 16,
-                    onPressed:
-                        () => context.goNamed(
-                          HomePage.route,
-                          extra: {"fromContinue": true},
-                        ),
+                    onPressed: () async {
+                      await ref
+                          .read(authViewModelProvider.notifier)
+                          .signUp(
+                            email: emailController.text,
+                            password: passwordController.text,
+                          );
+                      // =>
+                      //     context.goNamed(
+                      //       HomePage.route,
+                      //       extra: {"fromContinue": true},
+                      //     )
+                    },
                   ),
                   SizedBox(height: 24),
                   Align(
