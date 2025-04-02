@@ -6,7 +6,7 @@ class Pallete {
   static const subtitleText = Color(0xffa7a7a7);
   static const inactiveBottomBarItemColor = Color(0xffababab);
 
-  static const Color primaryColor = Color.fromRGBO(18, 18, 18, 1);
+  static const Color primaryColor = Color(0xFFf7ca00);
   static const Color backgroundColor = Color.fromRGBO(255, 255, 255, 1);
   static const Color gradient1 = Color(0xFFf7ca00);
   static const Color gradient2 = Color(0xffF0D400);

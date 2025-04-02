@@ -1,24 +1,24 @@
 import 'package:client/core/theme/app_pallette.dart';
 import 'package:flutter/material.dart';
 
-class PrimaryButton extends StatelessWidget {
+class CommonButton extends StatelessWidget {
   final String title;
   final Color backgroundColor;
   final bool isRounded;
 
-  const PrimaryButton({
+  const CommonButton({
     super.key,
     required this.title,
     required this.backgroundColor,
     this.isRounded = false,
   });
 
-  factory PrimaryButton.rounded({
+  factory CommonButton.rounded({
     Key? key,
     required String title,
     required Color backgroundColor,
   }) {
-    return PrimaryButton(
+    return CommonButton(
       key: key,
       title: title,
       backgroundColor: backgroundColor,
@@ -26,15 +26,40 @@ class PrimaryButton extends StatelessWidget {
     );
   }
 
-  factory PrimaryButton.squared({
+  factory CommonButton.squared({
     Key? key,
     required String title,
     required Color backgroundColor,
   }) {
-    return PrimaryButton(
+    return CommonButton(
       key: key,
       title: title,
       backgroundColor: backgroundColor,
+    );
+  }
+
+  factory CommonButton.grayed({Key? key, required String title}) {
+    return CommonButton(
+      key: key,
+      title: title,
+      backgroundColor: Pallete.lightGreyColor,
+    );
+  }
+
+  factory CommonButton.primary({Key? key, required String title}) {
+    return CommonButton(
+      key: key,
+      title: title,
+      backgroundColor: Pallete.primaryColor,
+    );
+  }
+
+  factory CommonButton.primaryRounded({Key? key, required String title}) {
+    return CommonButton(
+      key: key,
+      title: title,
+      backgroundColor: Pallete.primaryColor,
+      isRounded: true,
     );
   }
 

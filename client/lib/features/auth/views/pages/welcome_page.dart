@@ -1,6 +1,5 @@
 import 'package:client/core/localization/app_localizations.dart';
 import 'package:client/core/theme/app_pallette.dart';
-import 'package:client/features/auth/views/widgets/gray_button.dart';
 import 'package:client/features/auth/views/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -39,14 +38,11 @@ class WelcomePage extends ConsumerWidget {
                 const SizedBox(height: 24),
                 _buildBenefitsList(context),
                 const SizedBox(height: 32),
-                PrimaryButton.squared(
-                  title: localizations.signInButton,
-                  backgroundColor: Pallete.gradient1,
-                ),
+                CommonButton.primary(title: localizations.signInButton),
                 const SizedBox(height: 12),
-                GrayButton(title: localizations.createAccountButton),
+                CommonButton.grayed(title: localizations.createAccountButton),
                 const SizedBox(height: 12),
-                GrayButton(title: localizations.skipSignInButton),
+                CommonButton.grayed(title: localizations.skipSignInButton),
                 const SizedBox(height: 32),
               ],
             ),
