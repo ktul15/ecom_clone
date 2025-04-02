@@ -5,12 +5,14 @@ class CommonButton extends StatelessWidget {
   final String title;
   final Color backgroundColor;
   final bool isRounded;
+  final double fontSize;
 
   const CommonButton({
     super.key,
     required this.title,
     required this.backgroundColor,
     this.isRounded = false,
+    this.fontSize = 14,
   });
 
   factory CommonButton.rounded({
@@ -54,12 +56,17 @@ class CommonButton extends StatelessWidget {
     );
   }
 
-  factory CommonButton.primaryRounded({Key? key, required String title}) {
+  factory CommonButton.primaryRounded({
+    Key? key,
+    required String title,
+    double fontSize = 14,
+  }) {
     return CommonButton(
       key: key,
       title: title,
       backgroundColor: Pallete.primaryColor,
       isRounded: true,
+      fontSize: fontSize,
     );
   }
 
@@ -78,7 +85,7 @@ class CommonButton extends StatelessWidget {
       ),
       child: Text(
         title,
-        style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
+        style: TextStyle(fontSize: fontSize, fontWeight: FontWeight.w400),
       ),
     );
   }

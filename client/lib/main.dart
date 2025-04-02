@@ -1,7 +1,7 @@
 import 'package:client/core/localization/app_localizations.dart';
 import 'package:client/core/localization/language_provider.dart';
 import 'package:client/core/theme/theme.dart';
-import 'package:client/features/auth/views/pages/welcome_page.dart';
+import 'package:client/features/auth/views/pages/sign_in_or_create_account_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -23,7 +23,7 @@ class MyApp extends ConsumerWidget {
       locale: locale,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      home: const WelcomePage(),
+      home: const SignInOrCreateAccountPage(),
     );
   }
 }

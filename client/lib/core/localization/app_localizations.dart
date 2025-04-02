@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:intl/intl.dart';
 
 class AppLocalizations {
   final Locale locale;
@@ -37,6 +36,16 @@ class AppLocalizations {
       'signInButton': 'Already a customer? Sign in',
       'createAccountButton': 'New to Amazon? Create an account',
       'skipSignInButton': 'Skip sign in',
+      'signInOrCreateAccount': 'Sign in or create account',
+      'enterEmail': 'Enter email',
+      'enterPassword': 'Enter password',
+      'continueButton': 'Continue',
+      'agreeToTerms': 'By continuing, you agree to Amazon\'s ',
+      'conditionsOfUse': 'Conditions of Use',
+      'privacyNotice': 'Privacy Notice',
+      'and': 'and',
+      'help': 'Help',
+      'footerText': '© 1996-2021, Amazon.com, Inc. or its affiliates',
     },
     'es': {
       'signInTitle': 'Inicia sesión en tu cuenta',
@@ -67,13 +76,38 @@ class AppLocalizations {
     },
   };
 
-  String get signInTitle => _localizedStrings[locale.languageCode]!['signInTitle']!;
-  String get viewWishlist => _localizedStrings[locale.languageCode]!['viewWishlist']!;
-  String get findReorder => _localizedStrings[locale.languageCode]!['findReorder']!;
-  String get trackPurchases => _localizedStrings[locale.languageCode]!['trackPurchases']!;
-  String get signInButton => _localizedStrings[locale.languageCode]!['signInButton']!;
-  String get createAccountButton => _localizedStrings[locale.languageCode]!['createAccountButton']!;
-  String get skipSignInButton => _localizedStrings[locale.languageCode]!['skipSignInButton']!;
+  String get signInTitle =>
+      _localizedStrings[locale.languageCode]!['signInTitle']!;
+  String get viewWishlist =>
+      _localizedStrings[locale.languageCode]!['viewWishlist']!;
+  String get findReorder =>
+      _localizedStrings[locale.languageCode]!['findReorder']!;
+  String get trackPurchases =>
+      _localizedStrings[locale.languageCode]!['trackPurchases']!;
+  String get signInButton =>
+      _localizedStrings[locale.languageCode]!['signInButton']!;
+  String get createAccountButton =>
+      _localizedStrings[locale.languageCode]!['createAccountButton']!;
+  String get skipSignInButton =>
+      _localizedStrings[locale.languageCode]!['skipSignInButton']!;
+  String get signInOrCreateAccount =>
+      _localizedStrings[locale.languageCode]!['signInOrCreateAccount']!;
+  String get enterEmail =>
+      _localizedStrings[locale.languageCode]!['enterEmail']!;
+  String get enterPassword =>
+      _localizedStrings[locale.languageCode]!['enterPassword']!;
+  String get continueButton =>
+      _localizedStrings[locale.languageCode]!['continueButton']!;
+  String get agreeToTerms =>
+      _localizedStrings[locale.languageCode]!['agreeToTerms']!;
+  String get conditionsOfUse =>
+      _localizedStrings[locale.languageCode]!['conditionsOfUse']!;
+  String get privacyNotice =>
+      _localizedStrings[locale.languageCode]!['privacyNotice']!;
+  String get and => _localizedStrings[locale.languageCode]!['and']!;
+  String get help => _localizedStrings[locale.languageCode]!['help']!;
+  String get footerText =>
+      _localizedStrings[locale.languageCode]!['footerText']!;
 }
 
 class _AppLocalizationsDelegate
@@ -92,4 +126,4 @@ class _AppLocalizationsDelegate
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
-} 
+}

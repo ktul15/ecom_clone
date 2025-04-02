@@ -1,5 +1,5 @@
 import 'package:client/core/localization/app_localizations.dart';
-import 'package:client/core/theme/app_pallette.dart';
+import 'package:client/core/theme/app_text_styles.dart';
 import 'package:client/features/auth/views/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -30,10 +30,7 @@ class WelcomePage extends ConsumerWidget {
                 Text(
                   localizations.signInTitle,
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: AppTextStyles.bigTitle,
                 ),
                 const SizedBox(height: 24),
                 _buildBenefitsList(context),
@@ -69,24 +66,7 @@ class WelcomePage extends ConsumerWidget {
   Widget _buildBenefitItem(IconData icon, String text) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(text, style: TextStyle(fontSize: 16, color: Pallete.greyColor)),
-      ],
+      children: [Text(text, style: AppTextStyles.subtitle)],
     );
-  }
-
-  String _getLanguageName(Locale locale) {
-    switch (locale.languageCode) {
-      case 'en':
-        return 'English';
-      case 'es':
-        return 'Español';
-      case 'fr':
-        return 'Français';
-      case 'hi':
-        return 'हिंदी';
-      default:
-        return 'English';
-    }
   }
 }

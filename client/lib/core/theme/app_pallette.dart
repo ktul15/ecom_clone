@@ -14,6 +14,7 @@ class Pallete {
   static const Color borderColor = Color.fromRGBO(52, 51, 67, 1);
   static const Color whiteColor = Colors.white;
   static const Color textColor = Colors.black;
+  static Color linkColor = Colors.blueAccent.shade100;
   static const Color greyColor = Colors.grey;
   static Color lightGreyColor = Colors.grey.shade200;
   static const Color errorColor = Colors.redAccent;
