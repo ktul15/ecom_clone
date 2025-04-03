@@ -1,27 +1,28 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'home_view_model.dart';
+part of 'current_user_notifier.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$homeViewModelHash() => r'509b5edea7b7f4f3b9f1e7fa3a798c7432c215ce';
+String _$currentUserNotifierHash() =>
+    r'002b81f154e99725514361878fb229b209e96ce9';
 
-/// See also [HomeViewModel].
-@ProviderFor(HomeViewModel)
-final homeViewModelProvider =
-    AutoDisposeNotifierProvider<HomeViewModel, Object?>.internal(
-      HomeViewModel.new,
-      name: r'homeViewModelProvider',
+/// See also [CurrentUserNotifier].
+@ProviderFor(CurrentUserNotifier)
+final currentUserNotifierProvider =
+    NotifierProvider<CurrentUserNotifier, UserModel?>.internal(
+      CurrentUserNotifier.new,
+      name: r'currentUserNotifierProvider',
       debugGetCreateSourceHash:
           const bool.fromEnvironment('dart.vm.product')
               ? null
-              : _$homeViewModelHash,
+              : _$currentUserNotifierHash,
       dependencies: null,
       allTransitiveDependencies: null,
     );
 
-typedef _$HomeViewModel = AutoDisposeNotifier<Object?>;
+typedef _$CurrentUserNotifier = Notifier<UserModel?>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

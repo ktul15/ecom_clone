@@ -55,4 +55,40 @@ class AuthRemoteRepository {
       return Left(AppFailure(e.toString()));
     }
   }
+
+  Future<Either<AppFailure, UserModel>> getUserDetails({
+    required String token,
+  }) async {
+    try {
+      // Call API to register
+      final response = await _dio.get(
+        '${ServerConstants.serverBaseUrl}${ServerConstants.serverAuthBaseUrl}',
+        options: Options(headers: {"Authorization": "Bearer $token"}),
+      );
+      debugPrint("response.data: ${response.data}");
+      debugPrint("st: ${response.statusCode.toString()}");
+      if (response.statusCode != 201 && response.statusCode != 200) {
+        return Left(AppFailure(response.data['error'] as String));
+      }
+
+      if (response.statusCode == 401) {
+        return Left(AppFailure("Authorization failed."));
+      }
+
+      UserModel userModel = UserModel.fromJson(response.data);
+      return Right(userModel);
+    } on SocketException catch (e) {
+      debugPrint("SocketException: ${e.toString()}");
+      return Left(
+        AppFailure(
+          "Something went wrong. Please check your internet connection.",
+        ),
+      );
+    } on DioException catch (e) {
+      return Left(AppFailure("Something went wrong."));
+    } catch (e) {
+      debugPrint(e.toString());
+      return Left(AppFailure(e.toString()));
+    }
+  }
 }

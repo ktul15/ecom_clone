@@ -3,6 +3,7 @@ import 'package:client/core/localization/language_provider.dart';
 import 'package:client/core/router/gorouter.dart';
 import 'package:client/core/services/shared_preferences_service.dart';
 import 'package:client/core/theme/theme.dart';
+import 'package:client/features/auth/view_models/auth_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -11,6 +12,7 @@ void main() async {
 
   final container = ProviderContainer();
   await container.read(sharedPreferencesServiceProvider).init();
+  await container.read(authViewModelProvider.notifier).getUserDetails();
   runApp(UncontrolledProviderScope(container: container, child: MyApp()));
 }
 

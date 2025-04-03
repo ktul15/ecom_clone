@@ -5,7 +5,6 @@ const UserModel = require('../models/userModel');
 const UserController = {
   async getUserDetails(req, res) {
     try {
-      console.log(req.headers.authorization)
       const token = req.headers.authorization?.split(' ')[1]
 
       if(!token){
@@ -23,7 +22,7 @@ const UserController = {
       const {id, email} = user;
       res.status(200).json({id, email})
     } catch(err){
-      console.error(err)
+      console.error(`err: ${err}`)
       res.status(401).json({error: "Invalid token"})
     }
   },

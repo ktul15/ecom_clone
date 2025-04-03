@@ -1,5 +1,5 @@
+import 'package:client/core/providers/current_user_notifier.dart';
 import 'package:client/core/router/route_paths.dart';
-import 'package:client/core/services/shared_preferences_service.dart';
 import 'package:client/features/auth/views/pages/welcome_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -24,9 +24,7 @@ class _HomePageState extends ConsumerState<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final token = ref.read(sharedPreferencesServiceProvider).getToken();
-    debugPrint("token: $token");
-    // ref.read(sharedPreferencesServiceProvider).setToken("");
+    final token = ref.read(currentUserNotifierProvider)?.token;
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (mounted) {
         if (token == null || token == "") {
