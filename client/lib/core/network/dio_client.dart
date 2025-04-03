@@ -7,7 +7,7 @@ final dioProvider = Provider<Dio>((ref) {
       baseUrl: 'http://localhost:3000',
       headers: {'Content-Type': 'application/json'},
       connectTimeout: Duration(milliseconds: 5000),
-      receiveTimeout: Duration(milliseconds: 3000),
+      receiveTimeout: Duration(milliseconds: 5000),
       validateStatus: (status) {
         return status! < 500;
       },

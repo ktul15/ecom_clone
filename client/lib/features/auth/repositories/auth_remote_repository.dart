@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:client/core/models/app_failure.dart';
 import 'package:client/core/network/dio_client.dart';
 import 'package:client/core/network/server_constants.dart';
@@ -39,6 +41,15 @@ class AuthRemoteRepository {
 
       SignupResponse signupResponse = SignupResponse.fromJson(response.data);
       return Right(signupResponse.user.copyWith(token: signupResponse.token));
+    } on SocketException catch (e) {
+      debugPrint("SocketException: ${e.toString()}");
+      return Left(
+        AppFailure(
+          "Something went wrong. Please check your internet connection.",
+        ),
+      );
+    } on DioException catch (e) {
+      return Left(AppFailure("Something went wrong."));
     } catch (e) {
       debugPrint(e.toString());
       return Left(AppFailure(e.toString()));

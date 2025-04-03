@@ -20,8 +20,9 @@ class SignInOrCreateAccountPage extends ConsumerStatefulWidget {
 
 class _SignInOrCreateAccountPageState
     extends ConsumerState<SignInOrCreateAccountPage> {
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -61,88 +62,110 @@ class _SignInOrCreateAccountPageState
               ),
               child: Text("Amazon.in logo"),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(height: 16),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      localizations.signInOrCreateAccount,
-                      textAlign: TextAlign.start,
-                      style: AppTextStyles.title,
-                    ),
-                  ),
-                  SizedBox(height: 16),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      localizations.enterEmail,
-                      textAlign: TextAlign.start,
-                      style: AppTextStyles.subtitle,
-                    ),
-                  ),
-                  SizedBox(height: 4),
-                  CommonTextField(controller: emailController),
-                  SizedBox(height: 8),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      localizations.enterPassword,
-                      textAlign: TextAlign.start,
-                      style: AppTextStyles.subtitle,
-                    ),
-                  ),
-                  SizedBox(height: 4),
-                  CommonTextField(
-                    controller: passwordController,
-                    obscureText: true,
-                  ),
-                  SizedBox(height: 12),
-                  CommonButton.primaryRounded(
-                    title: localizations.continueButton,
-                    fontSize: 16,
-                    onPressed: () async {
-                      await ref
-                          .read(authViewModelProvider.notifier)
-                          .signUp(
-                            email: emailController.text,
-                            password: passwordController.text,
-                          );
-                      // =>
-                      //     context.goNamed(
-                      //       HomePage.route,
-                      //       extra: {"fromContinue": true},
-                      //     )
-                    },
-                  ),
-                  SizedBox(height: 24),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: RichText(
-                      text: TextSpan(
-                        text: localizations.agreeToTerms,
-                        style: AppTextStyles.body,
-                        children: [
-                          TextSpan(
-                            text: " ${localizations.conditionsOfUse}",
-                            style: AppTextStyles.link,
-                          ),
-                          TextSpan(
-                            text: " ${localizations.and}",
-                            style: AppTextStyles.body,
-                          ),
-                          TextSpan(
-                            text: " ${localizations.privacyNotice}",
-                            style: AppTextStyles.link,
-                          ),
-                        ],
+            Form(
+              key: _formKey,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: 16),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        localizations.signInOrCreateAccount,
+                        textAlign: TextAlign.start,
+                        style: AppTextStyles.title,
                       ),
                     ),
-                  ),
-                ],
+                    SizedBox(height: 16),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        localizations.enterEmail,
+                        textAlign: TextAlign.start,
+                        style: AppTextStyles.subtitle,
+                      ),
+                    ),
+                    SizedBox(height: 4),
+                    CommonTextField(
+                      controller: _emailController,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Must not be empty.";
+                        }
+                        if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
+                          return "Please enter valid email.";
+                        }
+                        return null;
+                      },
+                    ),
+                    SizedBox(height: 8),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        localizations.enterPassword,
+                        textAlign: TextAlign.start,
+                        style: AppTextStyles.subtitle,
+                      ),
+                    ),
+                    SizedBox(height: 4),
+                    CommonTextField(
+                      controller: _passwordController,
+                      obscureText: true,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Must not be empty.";
+                        }
+                        return null;
+                      },
+                    ),
+                    SizedBox(height: 12),
+                    CommonButton.primaryRounded(
+                      title: localizations.continueButton,
+                      fontSize: 16,
+                      onPressed: () async {
+                        if (_formKey.currentState!.validate()) {
+                          await ref
+                              .read(authViewModelProvider.notifier)
+                              .signUp(
+                                email: _emailController.text,
+                                password: _passwordController.text,
+                              );
+                        }
+                        // =>
+                        //     context.goNamed(
+                        //       HomePage.route,
+                        //       extra: {"fromContinue": true},
+                        //     )
+                      },
+                    ),
+                    SizedBox(height: 24),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: RichText(
+                        text: TextSpan(
+                          text: localizations.agreeToTerms,
+                          style: AppTextStyles.body,
+                          children: [
+                            TextSpan(
+                              text: " ${localizations.conditionsOfUse}",
+                              style: AppTextStyles.link,
+                            ),
+                            TextSpan(
+                              text: " ${localizations.and}",
+                              style: AppTextStyles.body,
+                            ),
+                            TextSpan(
+                              text: " ${localizations.privacyNotice}",
+                              style: AppTextStyles.link,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
             SizedBox(height: 32),
