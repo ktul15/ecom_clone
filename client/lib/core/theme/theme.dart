@@ -51,5 +51,8 @@ class AppTheme {
       selectionColor: Pallete.greyColor,
       selectionHandleColor: Pallete.greyColor,
     ),
+    progressIndicatorTheme: ProgressIndicatorThemeData(
+      color: Pallete.whiteColor,
+    ),
   );
 }

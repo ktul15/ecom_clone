@@ -28,6 +28,10 @@ class _SignInOrCreateAccountPageState
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context);
 
+    final isLoading = ref.watch(
+      authViewModelProvider.select((user) => user?.isLoading),
+    );
+
     ref.listen(authViewModelProvider, (_, next) {
       next?.when(
         data: (_) {
@@ -121,25 +125,27 @@ class _SignInOrCreateAccountPageState
                       },
                     ),
                     SizedBox(height: 12),
-                    CommonButton.primaryRounded(
-                      title: localizations.continueButton,
-                      fontSize: 16,
-                      onPressed: () async {
-                        if (_formKey.currentState!.validate()) {
-                          await ref
-                              .read(authViewModelProvider.notifier)
-                              .signUp(
-                                email: _emailController.text,
-                                password: _passwordController.text,
-                              );
-                        }
-                        // =>
-                        //     context.goNamed(
-                        //       HomePage.route,
-                        //       extra: {"fromContinue": true},
-                        //     )
-                      },
-                    ),
+                    isLoading == true
+                        ? CommonButton.roundedLoading(title: "")
+                        : CommonButton.primaryRounded(
+                          title: localizations.continueButton,
+                          fontSize: 16,
+                          onPressed: () async {
+                            if (_formKey.currentState!.validate()) {
+                              await ref
+                                  .read(authViewModelProvider.notifier)
+                                  .signUp(
+                                    email: _emailController.text,
+                                    password: _passwordController.text,
+                                  );
+                            }
+                            // =>
+                            //     context.goNamed(
+                            //       HomePage.route,
+                            //       extra: {"fromContinue": true},
+                            //     )
+                          },
+                        ),
                     SizedBox(height: 24),
                     Align(
                       alignment: Alignment.centerLeft,
