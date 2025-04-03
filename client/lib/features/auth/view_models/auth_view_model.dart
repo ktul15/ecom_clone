@@ -1,3 +1,4 @@
+import 'package:client/core/services/shared_preferences_service.dart';
 import 'package:client/features/auth/models/request/signup_request.dart';
 import 'package:client/features/auth/models/response/user_model.dart';
 import 'package:client/features/auth/repositories/auth_remote_repository.dart';
@@ -9,10 +10,12 @@ part 'auth_view_model.g.dart';
 @riverpod
 class AuthViewModel extends _$AuthViewModel {
   late AuthRemoteRepository _authRemoteRepository;
+  late SharedPreferencesService _sharedPreferencesService;
 
   @override
   AsyncValue<UserModel>? build() {
     _authRemoteRepository = ref.watch(authRemoteRepositoryProvider);
+    _sharedPreferencesService = ref.watch(sharedPreferencesServiceProvider);
     return null;
   }
 
@@ -27,8 +30,13 @@ class AuthViewModel extends _$AuthViewModel {
     final val = switch (res) {
       fpdart.Left(value: final l) =>
         state = AsyncError(l.message, StackTrace.current),
-      fpdart.Right(value: final r) => state = AsyncData(r),
+      fpdart.Right(value: final r) => signinSuccess(r),
     };
     // debugPrint("sign up value in view model: ${val.toString()}");
+  }
+
+  Future<AsyncData<UserModel>?> signinSuccess(UserModel user) async {
+    await _sharedPreferencesService.setToken(user.token);
+    return state = AsyncData(user);
   }
 }
