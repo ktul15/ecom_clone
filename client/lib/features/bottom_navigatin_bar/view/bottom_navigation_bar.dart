@@ -1,3 +1,4 @@
+import 'package:client/features/bottom_navigatin_bar/view/widgets/custom_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -21,16 +22,9 @@ class ScaffoldWithNestedNavigation extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: navigationShell,
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: navigationShell.currentIndex,
-        destinations: const [
-          NavigationDestination(label: 'Section A', icon: Icon(Icons.home)),
-          NavigationDestination(label: 'Section B', icon: Icon(Icons.settings)),
-          NavigationDestination(label: 'Section C', icon: Icon(Icons.settings)),
-          NavigationDestination(label: 'Section D', icon: Icon(Icons.settings)),
-          NavigationDestination(label: 'Section E', icon: Icon(Icons.settings)),
-        ],
-        onDestinationSelected: _goBranch,
+      bottomNavigationBar: CustomBottomNavigationBar(
+        currentIndex: navigationShell.currentIndex,
+        onTap: _goBranch,
       ),
     );
   }

@@ -1,8 +1,8 @@
 import 'package:client/core/router/route_paths.dart';
-import 'package:client/core/router/scaffold_with_nested_navigation.dart';
 import 'package:client/core/router/temp_pages.dart';
 import 'package:client/features/auth/views/pages/sign_in_or_create_account_page.dart';
 import 'package:client/features/auth/views/pages/welcome_page.dart';
+import 'package:client/features/bottom_navigatin_bar/view/bottom_navigation_bar.dart';
 import 'package:client/features/home/views/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';

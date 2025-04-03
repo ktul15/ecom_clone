@@ -39,7 +39,7 @@ class AppTheme {
       focusedErrorBorder: _border(Pallete.errorColor),
     ),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-      backgroundColor: Pallete.backgroundColor,
+      backgroundColor: Pallete.whiteColor,
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(

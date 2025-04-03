@@ -26,6 +26,7 @@ const UserController = {
       res.status(401).json({error: "Invalid token"})
     }
   },
+  
   async signIn(req, res) {
     try {
       const { email, password } = req.body;
