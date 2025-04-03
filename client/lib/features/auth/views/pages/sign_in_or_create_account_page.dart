@@ -5,8 +5,10 @@ import 'package:client/core/theme/app_text_styles.dart';
 import 'package:client/features/auth/view_models/auth_view_model.dart';
 import 'package:client/features/auth/views/widgets/common_button.dart';
 import 'package:client/features/auth/views/widgets/common_text_field.dart';
+import 'package:client/features/home/views/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 class SignInOrCreateAccountPage extends ConsumerStatefulWidget {
   const SignInOrCreateAccountPage({super.key});
@@ -38,10 +40,7 @@ class _SignInOrCreateAccountPageState
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(SnackBar(content: Text("Successfully signed in.")));
-          // Navigator.pushReplacement(
-          //   context,
-          //   MaterialPageRoute(builder: (_) => LoginPage()),
-          // );
+          context.goNamed(HomePage.route, extra: {"fromContinue": true});
         },
         error: (error, stackTrace) {
           ScaffoldMessenger.of(context)
