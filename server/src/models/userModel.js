@@ -2,6 +2,12 @@ const { v4: uuidv4 } = require('uuid');
 const pool = require('../config/databse');
 
 const UserModel = {
+
+  async getUserById(id) {
+    const result = await pool.query('SELECT id, email FROM users WHERE id = $1', [id]);
+    return result.rows[0];
+  },
+  
   async getAllUsers() {
     const result = await pool.query('SELECT * FROM users');
     return result.rows;

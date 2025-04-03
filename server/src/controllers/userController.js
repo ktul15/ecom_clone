@@ -3,6 +3,30 @@ const jwt = require('jsonwebtoken');
 const UserModel = require('../models/userModel');
 
 const UserController = {
+  async getUserDetails(req, res) {
+    try {
+      console.log(req.headers.authorization)
+      const token = req.headers.authorization?.split(' ')[1]
+
+      if(!token){
+        return res.status(401).json({error: "Authorization failed."})
+      }
+
+      const decoded = jwt.verify(token, process.env.JWT_SECRET)
+
+      const user = await UserModel.getUserById(decoded.id)
+
+      if(!user){
+        return res.status(404).json({error: "User not found"})
+      }
+
+      const {id, email} = user;
+      res.status(200).json({id, email})
+    } catch(err){
+      console.error(err)
+      res.status(401).json({error: "Invalid token"})
+    }
+  },
   async signIn(req, res) {
     try {
       const { email, password } = req.body;
