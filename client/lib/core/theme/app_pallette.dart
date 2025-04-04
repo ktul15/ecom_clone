@@ -22,6 +22,8 @@ class Pallete {
   static const Color bottomBarBlueColor = Color.fromRGBO(7, 123, 154, 1.0);
   static const Color appBarGradient1 = Color(0xFF82d8e3);
   static const Color appBarGradient2 = Color(0xFFa6e7ce);
+  static const Color locationSectionGradient1 = Color(0xFFb2ebf2);
+  static const Color locationSectionGradient2 = Color(0xFFcaf1f2);
 
   static const Color inactiveSeekColor = Colors.white38;
 }

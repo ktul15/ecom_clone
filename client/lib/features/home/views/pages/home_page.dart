@@ -1,7 +1,8 @@
 import 'package:client/core/providers/current_user_notifier.dart';
 import 'package:client/core/router/route_paths.dart';
-import 'package:client/core/theme/app_pallette.dart';
 import 'package:client/features/auth/views/pages/welcome_page.dart';
+import 'package:client/features/home/views/widgets/location_section.dart';
+import 'package:client/features/home/views/widgets/sticky_search_field_scan_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -35,16 +36,11 @@ class _HomePageState extends ConsumerState<HomePage> {
     });
     return Column(
       children: [
-        Container(
-          height: 88,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Pallete.appBarGradient1, Pallete.appBarGradient2],
-            ),
-          ),
-        ),
+        StickySearchFieldAndScanSection(),
+        LocationSection(),
         Expanded(
           child: ListView.builder(
+            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             itemBuilder: (context, index) {
               return Text("index: $index");
             },
