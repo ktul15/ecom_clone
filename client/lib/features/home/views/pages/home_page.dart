@@ -1,5 +1,6 @@
 import 'package:client/core/providers/current_user_notifier.dart';
 import 'package:client/core/router/route_paths.dart';
+import 'package:client/core/theme/app_pallette.dart';
 import 'package:client/features/auth/views/pages/welcome_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -32,6 +33,24 @@ class _HomePageState extends ConsumerState<HomePage> {
         }
       }
     });
-    return Scaffold(body: Center(child: Text("Home Page")));
+    return Column(
+      children: [
+        Container(
+          height: 88,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Pallete.appBarGradient1, Pallete.appBarGradient2],
+            ),
+          ),
+        ),
+        Expanded(
+          child: ListView.builder(
+            itemBuilder: (context, index) {
+              return Text("index: $index");
+            },
+          ),
+        ),
+      ],
+    );
   }
 }

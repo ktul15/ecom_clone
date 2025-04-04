@@ -20,6 +20,8 @@ class Pallete {
   static const Color errorColor = Colors.redAccent;
   static const Color transparentColor = Colors.transparent;
   static const Color bottomBarBlueColor = Color.fromRGBO(7, 123, 154, 1.0);
+  static const Color appBarGradient1 = Color(0xFF82d8e3);
+  static const Color appBarGradient2 = Color(0xFFa6e7ce);
 
   static const Color inactiveSeekColor = Colors.white38;
 }
