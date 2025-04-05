@@ -1,4 +1,7 @@
 import 'package:client/core/services/shared_preferences_service.dart';
+import 'package:client/features/home/models/category_model.dart';
+import 'package:client/features/home/repository/home_repository.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'home_view_model.g.dart';
@@ -12,4 +15,9 @@ class HomeViewModel extends _$HomeViewModel {
     _sharedPreferencesService = ref.watch(sharedPreferencesServiceProvider);
     return null;
   }
+}
+
+@riverpod
+Future<List<CategoryModel>> getCategories(Ref ref) async {
+  return await ref.watch(homeRepositoryProvider.notifier).getCategories();
 }
