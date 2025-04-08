@@ -1,4 +1,5 @@
 import 'package:client/features/home/models/category_model.dart';
+import 'package:client/features/home/models/product_model.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'home_repository.g.dart';
@@ -102,6 +103,60 @@ class HomeRepository extends _$HomeRepository {
         image: 'assets/images/category_images/rewards.jpg',
         description: 'Rewards and offers',
         order: 13,
+      ),
+    ];
+  }
+
+  Future<List<ProductModel>> getProducts() async {
+    return [
+      ProductModel(
+        imageUrl: 'assets/images/products/product_1.webp',
+        name: 'Product 1',
+        realPrice: '100',
+        sellingPrice: '80',
+        discountPercentage: '20%',
+      ),
+      ProductModel(
+        imageUrl: 'assets/images/products/product_2.webp',
+        name: 'Product 2',
+        realPrice: '200',
+        sellingPrice: '150',
+        discountPercentage: '25%',
+      ),
+      ProductModel(
+        imageUrl: 'assets/images/products/product_3.jpeg',
+        name: 'Product 3',
+        realPrice: '300',
+        sellingPrice: '250',
+        discountPercentage: '17%',
+      ),
+      ProductModel(
+        imageUrl: 'assets/images/products/product_4.webp',
+        name: 'Product 4',
+        realPrice: '400',
+        sellingPrice: '300',
+        discountPercentage: '25%',
+      ),
+      ProductModel(
+        imageUrl: 'assets/images/products/product_5.jpeg',
+        name: 'Product 5',
+        realPrice: '500',
+        sellingPrice: '450',
+        discountPercentage: '10%',
+      ),
+      ProductModel(
+        imageUrl: 'assets/images/products/product_6.webp',
+        name: 'Product 6',
+        realPrice: '500',
+        sellingPrice: '450',
+        discountPercentage: '10%',
+      ),
+      ProductModel(
+        imageUrl: 'assets/images/products/product_7.jpg',
+        name: 'Product 7',
+        realPrice: '500',
+        sellingPrice: '450',
+        discountPercentage: '10%',
       ),
     ];
   }

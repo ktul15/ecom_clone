@@ -25,6 +25,25 @@ final getCategoriesProvider =
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef GetCategoriesRef = AutoDisposeFutureProviderRef<List<CategoryModel>>;
+String _$getProductsHash() => r'865621c5ae22f1cf44d31cdc86a3cede04c788ea';
+
+/// See also [getProducts].
+@ProviderFor(getProducts)
+final getProductsProvider =
+    AutoDisposeFutureProvider<List<ProductModel>>.internal(
+      getProducts,
+      name: r'getProductsProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$getProductsHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef GetProductsRef = AutoDisposeFutureProviderRef<List<ProductModel>>;
 String _$homeViewModelHash() => r'509b5edea7b7f4f3b9f1e7fa3a798c7432c215ce';
 
 /// See also [HomeViewModel].
