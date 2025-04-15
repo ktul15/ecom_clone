@@ -9,39 +9,36 @@ void main() async {
   runApp(ProviderScope(child: const MyApp()));
 }
 
-class MyApp extends ConsumerStatefulWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
   @override
-  ConsumerState<MyApp> createState() => _MyAppState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    // Watch the token from the provider to reactively rebuild when it changes
+    final tokenAsync = ref.watch(tokenManagerProvider);
 
-class _MyAppState extends ConsumerState<MyApp> {
-  String? token;
-
-  @override
-  void initState() {
-    super.initState();
-    _fetchToken();
-  }
-
-  Future<void> _fetchToken() async {
-    final fetchedToken =
-        await ref.read(tokenManagerProvider.notifier).getToken();
-    setState(() {
-      token = fetchedToken;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp.router(
-      debugShowCheckedModeBanner: false,
-      title: 'Ecom Admin Panel',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      ),
-      routerConfig: token != null ? gorouter : loggedOutGoRouter,
+    return tokenAsync.when(
+      data: (token) {
+        return MaterialApp.router(
+          debugShowCheckedModeBanner: false,
+          title: 'Ecom Admin Panel',
+          theme: ThemeData(
+            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          ),
+          routerConfig:
+              token != null && token != "" ? gorouter : loggedOutGoRouter,
+        );
+      },
+      loading:
+          () => MaterialApp(
+            debugShowCheckedModeBanner: false,
+            home: Scaffold(body: Center(child: CircularProgressIndicator())),
+          ),
+      error:
+          (error, stack) => MaterialApp(
+            debugShowCheckedModeBanner: false,
+            home: Scaffold(body: Center(child: Text('Error: $error'))),
+          ),
     );
   }
 }

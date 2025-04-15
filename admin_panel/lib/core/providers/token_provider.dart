@@ -8,17 +8,25 @@ part 'token_provider.g.dart';
 @riverpod
 class TokenManager extends _$TokenManager {
   late FlutterSecureStorage secureStorage;
+  
   @override
-  String? build() {
+  Future<String?> build() async {
     secureStorage = ref.read(secureStorageProvider);
-    return null;
+    return await getToken();
   }
 
-  setToken(String token) async {
+  Future<void> setToken(String token) async {
     await secureStorage.write(key: Keys.token, value: token);
+    // Update the state with the new token
+    state = AsyncData(token);
   }
 
   Future<String?> getToken() async {
     return await secureStorage.read(key: Keys.token);
+  }
+  
+  Future<void> clearToken() async {
+    await secureStorage.delete(key: Keys.token);
+    state = const AsyncData(null);
   }
 }

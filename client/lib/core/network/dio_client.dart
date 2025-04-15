@@ -1,10 +1,11 @@
+import 'package:client/core/network/server_constants.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final dioProvider = Provider<Dio>((ref) {
   final dio = Dio(
     BaseOptions(
-      baseUrl: 'http://localhost:3000',
+      baseUrl: ServerConstants.serverBaseUrl,
       headers: {'Content-Type': 'application/json'},
       connectTimeout: Duration(milliseconds: 5000),
       receiveTimeout: Duration(milliseconds: 5000),

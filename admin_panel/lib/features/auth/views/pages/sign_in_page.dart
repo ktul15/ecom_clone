@@ -1,3 +1,4 @@
+import 'package:admin_panel/core/utils/util_functions.dart';
 import 'package:admin_panel/features/auth/view_models/auth_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -16,6 +17,23 @@ class _SignInPageState extends ConsumerState<SignInPage> {
 
   @override
   Widget build(BuildContext context) {
+    final isLoading = ref.watch(
+      authViewModelProvider.select((user) => user?.isLoading == true),
+    );
+
+    ref.listen(authViewModelProvider, (previous, next) {
+      next?.when(
+        data: (_) {
+          showSnackBar(context, "Successfully signed in!");
+          // context.goNamed(HomePage.route);
+        },
+        error: (error, stackTrace) {
+          showSnackBar(context, error.toString());
+        },
+        loading: () {},
+      );
+    });
+
     return Scaffold(
       body: Form(
         key: _formKey,
@@ -66,16 +84,22 @@ class _SignInPageState extends ConsumerState<SignInPage> {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () async {
+                emailController.text = "admin@mailinator.com";
+                passwordController.text = "123456";
                 // Handle sign in logic
                 if (_formKey.currentState!.validate()) {
                   // Perform sign in action
                   // For example, call a sign-in method from your view model
+                  FocusScope.of(context).requestFocus(FocusNode());
                   await ref
                       .read(authViewModelProvider.notifier)
                       .login(emailController.text, passwordController.text);
                 }
               },
-              child: const Text('Sign In'),
+              child:
+                  isLoading == true
+                      ? Center(child: CircularProgressIndicator.adaptive())
+                      : const Text('Sign In'),
             ),
           ],
         ),
